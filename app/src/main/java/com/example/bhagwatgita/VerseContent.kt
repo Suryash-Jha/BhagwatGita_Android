@@ -19,6 +19,13 @@ class VerseContent : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
+//    fun newInstance(pos: Int): {
+//        val args = Bundle()
+//        args.putInt("position", pos)
+//        val fragment = ()
+//        fragment.arguments = args
+//        return fragment
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,15 +42,15 @@ class VerseContent : Fragment() {
         var verse=1
 
         GlobalScope.launch(Dispatchers.IO) {
-            val resp = obj.getParticularVerse(1,4).body!!.string()
+            val resp = obj.getParticularVerse(2,13).body!!.string()
             GlobalScope.launch(Dispatchers.Main) {
 
             val gson = Gson().fromJson<GetParticularVerse>(resp, GetParticularVerse::class.java)
             sanskritShlokview.text= gson.text
             translationview.text= gson.translations?.get(0)?.description
             chap= gson.chapter_number!!
-                verse= gson.verse_number!!
-                chapXverseView.text= "Chapter ${chap} Verse ${verse}"
+            verse= gson.verse_number!!
+            chapXverseView.text= "Chapter ${chap} Verse ${verse}"
 
             }
         }

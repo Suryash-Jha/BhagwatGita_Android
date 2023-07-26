@@ -14,10 +14,10 @@ data class TranslationsItemx(
 data class GetAllVersesItem(
 	val commentaries: List<CommentariesItemx?>? = null,
 	val translations: List<TranslationsItemx?>? = null,
-	val chapterNumber: Int? = null,
+	val chapter_number: Int? = null,
 	val id: Int? = null,
 	val text: String? = null,
-	val verseNumber: Int? = null,
+	val verse_number: Int? = null,
 	val wordMeanings: String? = null,
 	val slug: String? = null,
 	val transliteration: String? = null
