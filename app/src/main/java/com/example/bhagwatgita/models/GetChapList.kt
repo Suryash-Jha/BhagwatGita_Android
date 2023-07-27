@@ -5,15 +5,15 @@ data class GetChapList(
 )
 
 data class GetChapListItem(
-	val nameMeaning: String? = null,
-	val nameTranslated: String? = null,
+	val name_meaning: String? = null,
+	val name_translated: String? = null,
 	val name: String? = null,
-	val versesCount: Int? = null,
-	val chapterNumber: Int? = null,
-	val chapterSummary: String? = null,
-	val chapterSummaryHindi: String? = null,
+	val verses_count: Int? = null,
+	val chapter_number: Int? = null,
+	val chapter_summary: String? = null,
+	val chapter_summary_hindi: String? = null,
 	val id: Int? = null,
-	val nameTransliterated: String? = null,
+	val name_transliterated: String? = null,
 	val slug: String? = null
 )
 

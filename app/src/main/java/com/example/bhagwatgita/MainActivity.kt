@@ -26,16 +26,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var obj= ApiCall()
-
+        val chap= intent.getIntExtra("chap", 1)
         GlobalScope.launch(Dispatchers.IO) {
             val gson = Gson()
-            val resp = obj.getAllVerses(2)
+            val resp = obj.getAllVerses(chap)
             val jsonString = resp.body?.string()
             GlobalScope.launch(Dispatchers.Main) {
 
                 val verses: List<GetAllVersesItem> = gson.fromJson(jsonString, Array<GetAllVersesItem>::class.java).toList()
                 val view_pager2= findViewById<ViewPager2>(R.id.view_pager2)
                 view_pager2.adapter= VerseAdapter(verses)
+                view_pager2.orientation= ViewPager2.ORIENTATION_VERTICAL
 
             }
         }
