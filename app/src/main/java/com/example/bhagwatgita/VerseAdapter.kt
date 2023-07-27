@@ -10,6 +10,7 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.bhagwatgita.models.GetAllVerses
 import com.example.bhagwatgita.models.GetAllVersesItem
+import com.example.bhagwatgita.models.TranslationsItemx
 
 class VerseAdapter(private var verses: List<GetAllVersesItem>) : RecyclerView.Adapter<VerseAdapter.Pager2ViewHolder>() {
 
@@ -37,9 +38,16 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: Pager2ViewHolder, position: Int) {
         holder.verse_sanskrit.text= verses.get(position).text
-        holder.verse_translation.text= verses.get(position).translations?.get(0)?.description ?: "Not found"
+        holder.verse_translation.text= getHindiTranslation(verses.get(position).translations) ?:"Not found"
         holder.chapXVerse.text= "Chapter ${verses.get(position).chapter_number.toString()} Verse ${verses.get(position).verse_number.toString()}"
 
+    }
+
+    private fun getHindiTranslation(translations: List<TranslationsItemx?>?): CharSequence? {
+        translations?.forEach{
+            if(it?.language == "hindi") return it.description
+        }
+        return translations?.get(0)?.description
     }
 
     override fun getItemCount(): Int {
