@@ -3,13 +3,8 @@ package com.example.bhagwatgita
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.example.bhagwatgita.models.GetAllVersesItem
 import com.example.bhagwatgita.models.GetChapListItem
 import com.google.gson.Gson
 import getJsonDataFromAsset

@@ -1,13 +1,18 @@
 package com.example.bhagwatgita
 
+import android.content.Context
+import com.example.bhagwatgita.models.GetAllVersesItem
+import com.example.bhagwatgita.models.GetChapListItem
+import com.google.gson.Gson
+import getJsonDataFromAsset
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
+import okhttp3.Response as Response1
 
 class ApiCall {
 
 // particular verse
-    fun getParticularVerse(chap: Int, verse: Int): Response {
+    fun getParticularVerse(chap: Int, verse: Int): Response1 {
         val client = OkHttpClient()
         val request = Request.Builder()
             .url("https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chap}/verses/${verse}/")
@@ -26,7 +31,7 @@ class ApiCall {
 
 
 //// all verse'
-    fun getAllVerses(chap: Int): Response {
+    fun getAllVerses(chap: Int): Response1 {
         val client = OkHttpClient()
 
         val request = Request.Builder()
@@ -44,7 +49,7 @@ class ApiCall {
 
 //
 ////    particular chapter
-    fun getParticularChap(chap: Int): Response {
+    fun getParticularChap(chap: Int): Response1 {
         val client = OkHttpClient()
 
         val request = Request.Builder()
@@ -59,8 +64,11 @@ class ApiCall {
 
 }
 
+//    Get all verses Faster
+
+
 ////    get all chap
-    fun getAllChap(): Response {
+    fun getAllChap(): Response1 {
         val client = OkHttpClient()
         val request = Request.Builder()
             .url("https://bhagavad-gita3.p.rapidapi.com/v2/chapters/?limit=18")
