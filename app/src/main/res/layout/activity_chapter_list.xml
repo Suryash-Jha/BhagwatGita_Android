@@ -11,5 +11,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/recycleViewChap"
+
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

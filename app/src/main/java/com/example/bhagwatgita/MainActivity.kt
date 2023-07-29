@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         val view_pager2= findViewById<ViewPager2>(R.id.view_pager2)
         view_pager2.adapter= VerseAdapter(verseList)
         view_pager2.orientation= ViewPager2.ORIENTATION_VERTICAL
+        val editText= findViewById<EditText>(R.id.editVerse)
+        editText.addTextChangedListener()
+        view_pager2.setCurrentItem(5,true)
 
 
 

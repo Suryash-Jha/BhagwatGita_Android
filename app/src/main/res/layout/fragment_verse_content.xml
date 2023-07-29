@@ -14,33 +14,61 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/chapXverse"
-            android:text="Chapter 1 verse 1"
-            android:layout_weight="2"
+            android:layout_margin="2sp"
+            android:background="@drawable/verse_border_background_light"
+            android:layout_weight="0.5"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="40sp"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chapXverse"
+            android:text="Chapter 1 Verse "
+            android:padding="5sp"
+            android:textColor="@color/black"
+            android:textSize="35sp"
 
             />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="hy"
+            android:id="@+id/editVerse"
+            android:textSize="35sp"
+            android:inputType="number"
+            android:background="@color/white"
+            />
+        </LinearLayout>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/verse_sanskrit"
             android:text="Sanskrit shlok"
+            android:padding="5sp"
             android:gravity="center"
-            android:layout_weight="3"
-            android:textSize="30sp" />
+            android:layout_gravity="center"
+            android:textColor="@color/ic_launcher_background"
+            android:background="@drawable/verse_border_background_light"
+            android:layout_weight="1"
+            android:textSize="25sp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/verse_translation"
             android:gravity="center"
+            android:layout_gravity="center"
             android:text="Translation "
-            android:layout_weight="9"
+            android:layout_margin="3sp"
+            android:padding="2sp"
+            android:textColor="@color/purple_700"
+            android:background="@drawable/verse_border_background_light"
+            android:layout_weight="3"
             android:textSize="20sp" />
     </LinearLayout>
 
