@@ -34,13 +34,17 @@
 
             />
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="hy"
+            android:layout_marginRight="5sp"
             android:id="@+id/editVerse"
             android:textSize="35sp"
+            android:padding="2sp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:background="@drawable/verse_editext"
             android:inputType="number"
-            android:background="@color/white"
             />
         </LinearLayout>
 

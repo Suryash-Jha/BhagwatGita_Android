@@ -3,21 +3,27 @@ package com.example.bhagwatgita
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.bhagwatgita.models.GetAllVerses
 import com.example.bhagwatgita.models.GetAllVersesItem
 import com.example.bhagwatgita.models.TranslationsItemx
 
-class VerseAdapter(private var verses: List<GetAllVersesItem>) : RecyclerView.Adapter<VerseAdapter.Pager2ViewHolder>() {
+class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_pager2 : ViewPager2) : RecyclerView.Adapter<VerseAdapter.Pager2ViewHolder>() {
 
     inner class Pager2ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val chapXVerse= itemView.findViewById<TextView>(R.id.chapXverse)
         val verse_sanskrit= itemView.findViewById<TextView>(R.id.verse_sanskrit)
         val verse_translation= itemView.findViewById<TextView>(R.id.verse_translation)
+        val editText= itemView.findViewById<EditText>(R.id.editVerse)
+//        var x= "1"
+
+//        val view_pager2= itemView.findViewById<ViewPager2>(R.id.view_pager2)
 
         init{
             verse_sanskrit.setOnClickListener{
@@ -25,10 +31,23 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>) : RecyclerView.Ad
                 Toast.makeText(itemView.context, "You clicked ${position+1}", Toast.LENGTH_SHORT).show()
 
             }
+            editText.setOnClickListener {
+                if(editText.getText().toString().isEmpty())
+                    view_pager2.setCurrentItem(0,true)
+                else{
+                    val s= Integer.parseInt(editText.text.toString())
+
+                    view_pager2.setCurrentItem(s-1 ,true)
+                }
+
+            }
 
         }
 
     }
+
+
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,7 +58,9 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: Pager2ViewHolder, position: Int) {
         holder.verse_sanskrit.text= verses.get(position).text
         holder.verse_translation.text= getHindiTranslation(verses.get(position).translations) ?:"Not found"
-        holder.chapXVerse.text= "Chapter ${verses.get(position).chapter_number.toString()} Verse ${verses.get(position).verse_number.toString()}"
+        holder.chapXVerse.text= "Chapter ${verses.get(position).chapter_number.toString()} Verse "
+        holder.editText.setText((position+1).toString())
+
 
     }
 
