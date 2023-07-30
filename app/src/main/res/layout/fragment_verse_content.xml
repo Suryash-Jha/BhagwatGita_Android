@@ -60,7 +60,12 @@
             android:background="@drawable/verse_border_background_light"
             android:layout_weight="1"
             android:textSize="25sp" />
-
+        <ImageButton
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:id="@+id/play_verse"
+            android:src="@drawable/ic_play_music"
+        />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

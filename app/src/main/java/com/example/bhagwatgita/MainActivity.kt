@@ -1,6 +1,7 @@
 package com.example.bhagwatgita
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.add
@@ -24,6 +26,7 @@ import getJsonDataFromAsset
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import startSound
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 //        val editText= findViewById<EditText>(R.id.editVerse)
         view_pager2.adapter= VerseAdapter(verseList, view_pager2)
         view_pager2.orientation= ViewPager2.ORIENTATION_VERTICAL
+
+
 
 //        editText.addTextChangedListener(object : TextWatcher {
 //

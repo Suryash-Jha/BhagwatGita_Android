@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.bhagwatgita.models.GetAllVerses
 import com.example.bhagwatgita.models.GetAllVersesItem
 import com.example.bhagwatgita.models.TranslationsItemx
+import startSound
 
 class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_pager2 : ViewPager2) : RecyclerView.Adapter<VerseAdapter.Pager2ViewHolder>() {
 
@@ -21,6 +23,7 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         val verse_sanskrit= itemView.findViewById<TextView>(R.id.verse_sanskrit)
         val verse_translation= itemView.findViewById<TextView>(R.id.verse_translation)
         val editText= itemView.findViewById<EditText>(R.id.editVerse)
+        val versePlayer= itemView.findViewById<ImageButton>(R.id.play_verse)
 //        var x= "1"
 
 //        val view_pager2= itemView.findViewById<ViewPager2>(R.id.view_pager2)
@@ -41,6 +44,10 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
                 }
 
             }
+            versePlayer.setOnClickListener {
+                startSound( "1/1.mp3", itemView.context)
+            }
+
 
         }
 
