@@ -1,5 +1,6 @@
 package com.example.bhagwatgita
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
@@ -24,6 +26,10 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         val verse_translation= itemView.findViewById<TextView>(R.id.verse_translation)
         val editText= itemView.findViewById<EditText>(R.id.editVerse)
         val versePlayer= itemView.findViewById<ImageButton>(R.id.play_verse)
+        val backBtn= itemView.findViewById<ImageButton>(R.id.back)
+        val nextBtn= itemView.findViewById<ImageButton>(R.id.next)
+        val prevBtn= itemView.findViewById<ImageButton>(R.id.prev)
+
 //        var x= "1"
 
 //        val view_pager2= itemView.findViewById<ViewPager2>(R.id.view_pager2)
@@ -46,6 +52,11 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
             }
             versePlayer.setOnClickListener {
                 startSound( "1/1.mp3", itemView.context)
+
+            }
+            backBtn.setOnClickListener{
+                val i= Intent(itemView.context, ChapterListActivity::class.java)
+                itemView.context.startActivity(i)
             }
 
 
@@ -67,6 +78,12 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         holder.verse_translation.text= getHindiTranslation(verses.get(position).translations) ?:"Not found"
         holder.chapXVerse.text= "Chapter ${verses.get(position).chapter_number.toString()} Verse "
         holder.editText.setText((position+1).toString())
+        holder.nextBtn.setOnClickListener {
+            view_pager2.setCurrentItem(position+1 ,true)
+        }
+        holder.prevBtn.setOnClickListener {
+            view_pager2.setCurrentItem(position-1 ,true)
+        }
 
 
     }

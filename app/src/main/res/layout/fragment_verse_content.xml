@@ -30,7 +30,7 @@
             android:text="Chapter 1 Verse "
             android:padding="5sp"
             android:textColor="@color/black"
-            android:textSize="35sp"
+            android:textSize="30sp"
 
             />
         <EditText
@@ -60,12 +60,7 @@
             android:background="@drawable/verse_border_background_light"
             android:layout_weight="1"
             android:textSize="25sp" />
-        <ImageButton
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:id="@+id/play_verse"
-            android:src="@drawable/ic_play_music"
-        />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,6 +74,57 @@
             android:background="@drawable/verse_border_background_light"
             android:layout_weight="3"
             android:textSize="20sp" />
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@drawable/verse_border_background_light"
+            android:gravity="center"
+            android:padding="10sp"
+
+            >
+            <ImageButton
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:id="@+id/liked"
+                android:layout_weight="1"
+                android:background="@drawable/verse_border_background_light"
+                android:src="@drawable/ic_unliked"
+                />
+
+            <ImageButton
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:id="@+id/prev"
+                android:layout_weight="1"
+                android:background="@drawable/verse_border_background_light"
+                android:src="@drawable/ic_prev"
+                />
+            <ImageButton
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:id="@+id/play_verse"
+                android:layout_weight="1"
+                android:background="@drawable/verse_border_background_light"
+                android:src="@drawable/ic_play_music"
+                />
+            <ImageButton
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:id="@+id/next"
+                android:layout_weight="1"
+                android:background="@drawable/verse_border_background_light"
+                android:src="@drawable/ic_next"
+                />
+            <ImageButton
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:id="@+id/back"
+                android:layout_weight="1"
+                android:background="@drawable/verse_border_background_light"
+                android:src="@drawable/ic_back"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>

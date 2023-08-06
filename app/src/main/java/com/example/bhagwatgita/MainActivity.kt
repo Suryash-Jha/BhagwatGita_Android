@@ -39,39 +39,8 @@ class MainActivity : AppCompatActivity() {
         val verses_Json= getJsonDataFromAsset(this, "Chap_${chap}.json")
         val verseList: List<GetAllVersesItem> = Gson().fromJson(verses_Json.toString(), Array<GetAllVersesItem>::class.java).toList()
         val view_pager2= findViewById<ViewPager2>(R.id.view_pager2)
-//        val editText= findViewById<EditText>(R.id.editVerse)
         view_pager2.adapter= VerseAdapter(verseList, view_pager2)
         view_pager2.orientation= ViewPager2.ORIENTATION_VERTICAL
-
-
-
-//        editText.addTextChangedListener(object : TextWatcher {
-//
-//            override fun afterTextChanged(s: Editable) {}
-//
-//            override fun beforeTextChanged(
-//                s: CharSequence, start: Int,
-//                count: Int, after: Int
-//            ) {
-//            }
-//
-//            override fun onTextChanged(
-//                s: CharSequence, start: Int,
-//                before: Int, count: Int
-//            ) {
-//                view_pager2.setCurrentItem(Integer.parseInt(s as String),true)
-//            }
-//        })
-
-//        editText.setOnClickListener {
-//            Toast.makeText(this, editText.text.toString(), Toast.LENGTH_SHORT).show()
-//        }
-
-//        homeBtn.setOnClickListener{
-//            supportFragmentManager.commit {
-//                replace<VerseContent>(R.id.)
-//            }
-//        }
 
 
     }
