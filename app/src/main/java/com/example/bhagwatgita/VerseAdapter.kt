@@ -65,14 +65,15 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
 
     }
 
-    private fun handleMusic(itemView: View, playBtn: ImageButton?, verse: Int?) {
+    private fun handleMusic(itemView: View, playBtn: ImageButton?, verse: Int?, chap: Int?) {
+
         if(mMediaPlayer!= null && mMediaPlayer!!.isPlaying){
             mMediaPlayer?.pause()
             playBtn?.setImageResource(R.drawable.ic_play_music)
         }
         else{
             if(mMediaPlayer== null){
-                mMediaPlayer= MediaPlayer.create(itemView.context, itemView.context.resources.getIdentifier("x${verse}", "raw", itemView.context.packageName))
+                mMediaPlayer= MediaPlayer.create(itemView.context, itemView.context.resources.getIdentifier("c${chap}v${verse}", "raw", itemView.context.packageName))
                 mMediaPlayer!!.start()
             }
             else mMediaPlayer!!.start()
@@ -137,7 +138,7 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
             }
         }
         holder.versePlayer.setOnClickListener {
-            handleMusic(holder.itemView, holder.playBtn, verse)
+            handleMusic(holder.itemView, holder.playBtn, verse, chap)
         }
 
 
