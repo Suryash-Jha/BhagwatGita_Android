@@ -121,7 +121,7 @@
                 android:id="@+id/back"
                 android:layout_weight="1"
                 android:background="@drawable/verse_border_background_light"
-                android:src="@drawable/ic_back"
+                android:src="@drawable/ic_lang"
                 />
 
         </LinearLayout>

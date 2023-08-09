@@ -27,7 +27,7 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         val verse_translation= itemView.findViewById<TextView>(R.id.verse_translation)
         val editText= itemView.findViewById<EditText>(R.id.editVerse)
         val versePlayer= itemView.findViewById<ImageButton>(R.id.play_verse)
-        val backBtn= itemView.findViewById<ImageButton>(R.id.back)
+        val langChangeBtn= itemView.findViewById<ImageButton>(R.id.back)
         val nextBtn= itemView.findViewById<ImageButton>(R.id.next)
         val prevBtn= itemView.findViewById<ImageButton>(R.id.prev)
         val likeBtn= itemView.findViewById<ImageButton>(R.id.liked)
@@ -55,8 +55,8 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
 
             }
 
-            backBtn.setOnClickListener{
-                val i= Intent(itemView.context, ChapterListActivity::class.java)
+            langChangeBtn.setOnClickListener{
+                val i= Intent(itemView.context, LanguageSelectActivity::class.java)
                 itemView.context.startActivity(i)
             }
 
