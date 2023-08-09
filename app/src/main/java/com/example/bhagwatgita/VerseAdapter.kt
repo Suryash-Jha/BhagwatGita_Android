@@ -97,7 +97,7 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         val gson= Gson()
         val type= object: TypeToken<ArrayList<Pair<Int, Int>>>(){}.type
         val json= prefs.getString("liked", null)
-        val lis= gson.fromJson<ArrayList<Pair<Int, Int>>>(json, type)
+        val lis= gson.fromJson<ArrayList<Pair<Int, Int>>>(json, type) ?: ArrayList()
         if(lis.contains(chap to verse)){
             likeBtn.setImageResource(R.drawable.ic_liked)
             return "liked"
@@ -113,7 +113,7 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
 
 
         holder.verse_sanskrit.text= verses.get(position).text
-        holder.verse_translation.text= getHindiTranslation(verses.get(position).translations) ?:"Not found"
+        holder.verse_translation.text= getTranslation(verses.get(position).translations, holder.ctx) ?:"Not found"
         holder.chapXVerse.text= "Chapter ${chap.toString()} Verse "
         holder.editText.setText((position+1).toString())
         holder.likeBtn.tag= getLikedStatus(holder.ctx, chap, verse, holder.likeBtn)
@@ -198,9 +198,15 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         }
     }
 
-    private fun getHindiTranslation(translations: List<TranslationsItemx?>?): CharSequence? {
+    private fun getTranslation(translations: List<TranslationsItemx?>?, ctx: Context): CharSequence? {
+        val prefs= ctx.getSharedPreferences("prefs", MODE_PRIVATE)
+        val lang= prefs.getString("lang", null)
+        if(lang== null){
+            val i= Intent(ctx, LanguageSelectActivity::class.java)
+            ctx.startActivity(i)
+        }
         translations?.forEach{
-            if(it?.language == "hindi") return it.description
+            if(it?.language == lang) return it?.description
         }
 
         return translations?.get(0)?.description
