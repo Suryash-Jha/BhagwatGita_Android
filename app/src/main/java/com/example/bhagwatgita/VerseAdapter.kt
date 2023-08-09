@@ -1,9 +1,9 @@
 package com.example.bhagwatgita
 
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.media.MediaPlayer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.bhagwatgita.models.GetAllVersesItem
 import com.example.bhagwatgita.models.TranslationsItemx
-import startSound
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_pager2 : ViewPager2) : RecyclerView.Adapter<VerseAdapter.Pager2ViewHolder>() {
     var mMediaPlayer: MediaPlayer? = null
@@ -91,7 +92,18 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         return v
     }
 
-    private fun getLikedStatus(chap: Int?, verse: Int?): Any? {
+    private fun getLikedStatus(ctx: Context, chap: Int?, verse: Int?, likeBtn: ImageButton): Any? {
+        val prefs= ctx.getSharedPreferences("pref", MODE_PRIVATE)
+        val gson= Gson()
+        val type= object: TypeToken<ArrayList<Pair<Int, Int>>>(){}.type
+        val json= prefs.getString("liked", null)
+        val lis= gson.fromJson<ArrayList<Pair<Int, Int>>>(json, type)
+        if(lis.contains(chap to verse)){
+            likeBtn.setImageResource(R.drawable.ic_liked)
+            return "liked"
+        }
+        likeBtn.setImageResource(R.drawable.ic_unliked)
+
         return "unliked"
     }
 
@@ -104,12 +116,12 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         holder.verse_translation.text= getHindiTranslation(verses.get(position).translations) ?:"Not found"
         holder.chapXVerse.text= "Chapter ${chap.toString()} Verse "
         holder.editText.setText((position+1).toString())
-        holder.likeBtn.tag= getLikedStatus(chap, verse)
+        holder.likeBtn.tag= getLikedStatus(holder.ctx, chap, verse, holder.likeBtn)
         val pref= holder.ctx.getSharedPreferences("pref", MODE_PRIVATE)
         val editor= pref.edit()
         editor.putInt("arr2", 6)
         editor.apply()
-        Log.i("test", pref.all.toString())
+//        Log.i("test", pref.all.toString())
 
 
         holder.nextBtn.setOnClickListener {
@@ -125,13 +137,13 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
         holder.likeBtn.setOnClickListener {
             if(holder.likeBtn.tag== "liked"){
                 holder.likeBtn.setImageResource(R.drawable.ic_unliked)
-//                removeFromFav(chap, verse)
+                removeFromFav(holder.ctx, chap, verse)
                 holder.likeBtn.tag= "unliked"
                 Toast.makeText(holder.ctx, "Removed From Favourites", Toast.LENGTH_SHORT).show()
             }
             else{
                 holder.likeBtn.setImageResource(R.drawable.ic_liked)
-//                addToFav(chap, verse)
+                addToFav(holder.ctx, chap, verse)
                 holder.likeBtn.tag= "liked"
                 Toast.makeText(holder.ctx, "Added To Favourites", Toast.LENGTH_SHORT).show()
 
@@ -143,6 +155,40 @@ class VerseAdapter(private var verses: List<GetAllVersesItem>, private var view_
 
 
     }
+
+    private fun removeFromFav(ctx: Context, chap: Int?, verse: Int?) {
+        val sharedPrefs = ctx.getSharedPreferences("pref", MODE_PRIVATE)
+        val gson = Gson()
+//        Log.d("pref", sharedPrefs.all.toString())
+        val json = sharedPrefs.getString("liked", null)
+        val type = object : TypeToken<ArrayList<Pair<Int, Int>>>() {}.type
+        val lis = gson.fromJson<ArrayList<Pair<Int, Int>>>(json, type) ?: ArrayList()
+
+        lis.remove(Pair(chap, verse))
+
+        val editor = sharedPrefs.edit()
+        val updatedJson = gson.toJson(lis)
+        editor.putString("liked", updatedJson)
+        editor.apply()
+
+    }
+
+    private fun addToFav(ctx: Context, chap: Int?, verse: Int?) {
+        val shared_prefs= ctx.getSharedPreferences("pref", MODE_PRIVATE)
+        val gson= Gson()
+        val json= shared_prefs.getString("liked", null)
+//        println(json.toString())
+        val type= object : TypeToken<ArrayList<Pair<Int, Int>>> (){}.type
+        val lis= gson.fromJson<ArrayList<Pair<Int, Int>>>(json, type) ?: ArrayList()
+        lis.add((chap to verse) as Pair<Int, Int>)
+
+        val editor = shared_prefs.edit()
+        val updatedJson = gson.toJson(lis)
+        editor.putString("liked", updatedJson)
+        editor.apply()
+
+    }
+    
 
     private fun stopAudio() {
         if(mMediaPlayer!= null){
