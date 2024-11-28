@@ -19,7 +19,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Preferred Language"
+            android:text="Choose Language"
             android:textSize="30sp"
             android:textColor="@color/black"
             android:layout_marginBottom="60sp"
